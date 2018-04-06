@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
-import image from 'resources/images/fox.jpg'
+
+import Main from 'components/Main'
 
 class App extends Component {
   render() {
@@ -9,9 +10,8 @@ class App extends Component {
       <Router>
         <div>
           <h1>Hello World</h1>
-          <img src={image} alt="Cute Fox" />
           {/* Layout goes here */}
-          {/* Routes go here */}
+          <Route exact path="/" component={Main}/>
         </div>
       </Router>
     )

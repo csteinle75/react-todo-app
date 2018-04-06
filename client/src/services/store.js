@@ -1,10 +1,10 @@
 import {createStore, combineReducers} from 'redux'
 
-// import reducers here
+import todoReducer from 'reducers/todoReducer'
 
 const rootReducer = combineReducers(
   { 
-    'null':null // delete this
+    todo: todoReducer
     // namespace your reducers here
   }
 )

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {Container, Divider, Button, Input, Segment, Header} from 'semantic-ui-react'
+import {Container, Divider, Button, Input, Segment, Header, Checkbox} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 //actions
-import {addTodo, getTodos, deleteTodo} from 'actions/todoActions'
+import {addTodo, getTodos, deleteTodo, toggleCompleted} from 'actions/todoActions'
 
 //styles
 import './Main.css'
@@ -16,18 +16,26 @@ class Main extends Component{
 	componentDidMount(){
 		getTodos()
 	}
-
-
+	componentWillReceiveProps(newProps){
+		console.log(newProps)
+		// BAD - KEEPS CALLING FUNC
+		// if (this.props !== newProps) {
+		// 	getTodos()
+		// }
+	}
 
 	handleSubmit(e){
 		e.preventDefault()
-		const theTodo = document.getElementById('todoInput').value
-		addTodo(theTodo)
+		const theTodo = document.getElementById('todoInput')
+		addTodo(theTodo.value)
+		theTodo.value = ''
 	}
-
-	removeTodo(e,id){
+	handleComplete(e, id, completestatus){
 		e.preventDefault()
-		console.log(id)
+		toggleCompleted(id, completestatus)
+	}
+	handleRemove(e,id){
+		e.preventDefault()
 		deleteTodo(id)
 	}
 
@@ -47,8 +55,8 @@ class Main extends Component{
 				<Segment.Group>
 					{this.props.todos.map(todo =>  (
 							<Segment.Group horizontal completed={`${todo.completed}`} todoid={todo.id} key={'todo-' + todo.id}>
-								<Segment>{todo.content}</Segment>
-								<Button color="red" attached="right" icon="remove" onClick={ e => this.removeTodo(e, todo.id)}></Button>
+								<Segment><Checkbox checked={todo.completed} onChange={ e => this.handleComplete(e, todo.id, todo.completed)}/>{todo.content}</Segment>
+								<Button color="red" attached="right" icon="remove" onClick={ e => this.handleRemove(e, todo.id)}></Button>
 							</Segment.Group>
 							)
 						)}
@@ -61,7 +69,7 @@ class Main extends Component{
 
 function mapStateToProps(state){
 	return{
-		todos: state.todo.todos
+		todos: state.todoReducer.todos
 	}
 }
 

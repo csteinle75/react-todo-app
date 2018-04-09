@@ -23,7 +23,18 @@ export function addTodo(todo){
 
 export function deleteTodo(todoid){
 	axios.delete('http://localhost:3001/todos/' + todoid).then( response => {
-		console.log(response)
+		console.log('deleted todo')
 		getTodos()
 	})
+}
+
+export function toggleCompleted(todoid, completestatus){
+	// Current Method
+	axios.patch('http://localhost:3001/todos/' + todoid, {
+		completed: !completestatus
+	}).then( response => {
+		console.log('toggled complete')
+		getTodos()
+	})
+
 }

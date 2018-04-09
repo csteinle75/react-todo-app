@@ -2,8 +2,13 @@
   "todos": [
     {
       "completed": false,
-      "content": "This is to test the POST",
-      "id": 1
+      "content": "asdfasdf",
+      "id": 3
+    },
+    {
+      "completed": false,
+      "content": "asdfasdfasdf",
+      "id": 4
     }
   ]
 }

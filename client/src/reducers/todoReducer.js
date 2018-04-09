@@ -1,5 +1,5 @@
 const initialState = {
-	visibilityFilter: null,
+	visibilityFilter: 'ALL',
 	todos: []
 }
 

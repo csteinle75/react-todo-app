@@ -53,13 +53,38 @@ class Main extends Component{
 				</Input>
 				<Divider />
 				<Segment.Group>
-					{this.props.todos.map(todo =>  (
-							<Segment.Group horizontal completed={`${todo.completed}`} todoid={todo.id} key={'todo-' + todo.id}>
-								<Segment><Checkbox checked={todo.completed} onChange={ e => this.handleComplete(e, todo.id, todo.completed)}/>{todo.content}</Segment>
-								<Button color="red" attached="right" icon="remove" onClick={ e => this.handleRemove(e, todo.id)}></Button>
-							</Segment.Group>
-							)
-						)}
+				{/*testing visiblity filter*/}
+					{this.props.todos.map(todo =>{
+						if (this.props.visiblity === 'COMPLETED'){
+							if(todo.completed === true){
+								return (
+										<Segment.Group horizontal completed={`${todo.completed}`} todoid={todo.id} key={'todo-' + todo.id}>
+												<Segment><Checkbox checked={todo.completed} onChange={ e => this.handleComplete(e, todo.id, todo.completed)}/>{todo.content}</Segment>
+												<Button color="red" attached="right" icon="remove" onClick={ e => this.handleRemove(e, todo.id)}></Button>
+										</Segment.Group>
+									)
+							} else{return ''}
+							
+						} else if(this.props.visiblity === 'ACTIVE'){
+							if(todo.completed === false){
+								return (
+										<Segment.Group horizontal completed={`${todo.completed}`} todoid={todo.id} key={'todo-' + todo.id}>
+											<Segment><Checkbox checked={todo.completed} onChange={ e => this.handleComplete(e, todo.id, todo.completed)}/>{todo.content}</Segment>
+											<Button color="red" attached="right" icon="remove" onClick={ e => this.handleRemove(e, todo.id)}></Button>
+										</Segment.Group>
+									)
+							} else{return ''}
+
+						}else {
+							return (
+									<Segment.Group horizontal completed={`${todo.completed}`} todoid={todo.id} key={'todo-' + todo.id}>
+											<Segment><Checkbox checked={todo.completed} onChange={ e => this.handleComplete(e, todo.id, todo.completed)}/>{todo.content}</Segment>
+											<Button color="red" attached="right" icon="remove" onClick={ e => this.handleRemove(e, todo.id)}></Button>
+									</Segment.Group>
+								)
+						}
+					})}
+						
 				</Segment.Group>
 			</Segment>
 		</Container>
@@ -69,7 +94,8 @@ class Main extends Component{
 
 function mapStateToProps(state){
 	return{
-		todos: state.todoReducer.todos
+		todos: state.todoReducer.todos,
+		visiblity: state.todoReducer.visibilityFilter
 	}
 }
 

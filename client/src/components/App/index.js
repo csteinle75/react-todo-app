@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <h1>Hello World</h1>
+          <h1>Todo App</h1>
           {/* Layout goes here */}
           <Route exact path="/" component={Main}/>
           <Route path="/completed" component={Completed}/>

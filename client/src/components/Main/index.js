@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {Container, Divider, Button, Input, Segment, Header, Checkbox} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 //actions
-import {addTodo, getTodos, deleteTodo, toggleCompleted} from 'actions/todoActions'
+import {addTodo, getTodos, deleteTodo, toggleCompleted, changeVisibility} from 'actions/todoActions'
 
 //styles
 import './Main.css'
@@ -14,14 +15,14 @@ class Main extends Component{
 	}
 
 	componentDidMount(){
+		changeVisibility(this.props.match.params.visibility)
 		getTodos()
 	}
 	componentWillReceiveProps(newProps){
-		console.log(newProps)
-		// BAD - KEEPS CALLING FUNC
-		// if (this.props !== newProps) {
-		// 	getTodos()
-		// }
+		if(this.props.match.params.visibility !== newProps.match.params.visibility){
+			changeVisibility(newProps.match.params.visibility)
+			// getTodos()
+		}
 	}
 
 	handleSubmit(e){
@@ -85,6 +86,11 @@ class Main extends Component{
 						}
 					})}
 						
+				</Segment.Group>
+				<Segment.Group horizontal>
+					<Link to="/"><Button>View All</Button></Link>
+					<Link to="active"><Button>View Active</Button></Link>
+					<Link to="completed"><Button>View Completed</Button></Link>
 				</Segment.Group>
 			</Segment>
 		</Container>

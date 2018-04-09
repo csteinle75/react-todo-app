@@ -7,8 +7,13 @@
     },
     {
       "completed": false,
-      "content": "asdf",
+      "content": "Lorem ipsum",
       "id": 5
+    },
+    {
+      "completed": true,
+      "content": "This is a todo",
+      "id": 6
     }
   ]
 }

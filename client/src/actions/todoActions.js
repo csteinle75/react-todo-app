@@ -38,3 +38,10 @@ export function toggleCompleted(todoid, completestatus){
 	})
 
 }
+
+export function changeVisibility(visibility = 'ALL'){
+	store.dispatch({
+		type: 'CHANGE_VISIBILITY',
+		payload: visibility.toUpperCase()
+	})
+}

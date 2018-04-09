@@ -1,14 +1,19 @@
 {
   "todos": [
     {
-      "completed": false,
-      "content": "asdfasdf",
-      "id": 3
+      "completed": true,
+      "content": "asdfasdfasdf",
+      "id": 4
     },
     {
       "completed": false,
-      "content": "asdfasdfasdf",
-      "id": 4
+      "content": "Lorem ipsum",
+      "id": 5
+    },
+    {
+      "completed": true,
+      "content": "This is a todo",
+      "id": 6
     }
   ]
 }
